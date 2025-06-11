@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Books & Media - Swiftora</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #f0f8ff;
+    }
+    header {
+      background-color: #1976d2;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    .back-btn {
+      display: inline-block;
+      margin: 15px 30px;
+      padding: 10px 15px;
+      background-color: #1976d2;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+    .back-btn:hover {
+      background-color: #0d47a1;
+      box-shadow: 0 0 10px #0d47a1;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 30px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .product-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+    .product-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+    .product-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .product-price {
+      color: #d32f2f;
+      font-size: 16px;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+    .product-desc {
+      font-size: 14px;
+      color: #555;
+      margin: 10px 0;
+    }
+    .add-cart-btn {
+      background-color: #1976d2;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: auto;
+      transition: background 0.3s ease, transform 0.1s ease;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .add-cart-btn:hover {
+      background-color: #0d47a1;
+    }
+    .add-cart-btn:active {
+      transform: scale(0.95);
+    }
+  </style>
+</head>
+<body>
+
+<header>Books & Media - Swiftora</header>
+<a href="index.html" class="back-btn">← Back to Home</a>
+
+<div class="product-grid">
+
+  <div class="product-card">
+    <img src="book1.jpeg" alt="Atomic Habits">
+    <div class="product-title">Atomic Habits</div>
+    <div class="product-price">₹499</div>
+    <div class="product-desc">By James Clear | Paperback | Self-help bestseller</div>
+    <button class="add-cart-btn" onclick="addToCart('Atomic Habits', 499)">Add to Cart</button>
+  </div>
+
+  <div class="product-card">
+    <img src="movie.jpeg" alt="Inception DVD">
+    <div class="product-title">Inception - DVD</div>
+    <div class="product-price">₹299</div>
+    <div class="product-desc">Director: Christopher Nolan | Sci-Fi | English Audio</div>
+    <button class="add-cart-btn" onclick="addToCart('Inception DVD', 299)">Add to Cart</button>
+  </div>
+
+  <div class="product-card">
+    <img src="magazine.jpeg" alt="Tech Magazine">
+    <div class="product-title">Tech Today - Magazine</div>
+    <div class="product-price">₹199</div>
+    <div class="product-desc">Latest in gadgets & innovations | Monthly Edition</div>
+    <button class="add-cart-btn" onclick="addToCart('Tech Today Magazine', 199)">Add to Cart</button>
+  </div>
+
+</div>
+
+<script>
+  function addToCart(productName, price) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const index = cart.findIndex(item => item.name === productName);
+    if(index !== -1) {
+      cart[index].quantity += 1;
+    } else {
+      cart.push({ name: productName, price: price, quantity: 1 });
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert(`${productName} added to cart!`);
+  }
+</script>
+
+</body>
+</html>

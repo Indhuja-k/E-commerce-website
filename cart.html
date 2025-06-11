@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cart - Swiftora</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #e3f2fd;
+    }
+    header {
+      background-color: #1976d2;
+      color: white;
+      padding: 20px;
+      font-size: 28px;
+      font-weight: 600;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    .cart-container {
+      max-width: 900px;
+      margin: 30px auto;
+      background: white;
+      padding: 25px 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .back-btn {
+      background-color: #1976d2;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      font-weight: 600;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+    .back-btn:hover {
+      background-color: #0d47a1;
+      box-shadow: 0 0 10px #0d47a1;
+    }
+    .cart-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 10px;
+    }
+    .item-info {
+      flex: 1;
+    }
+    .item-title {
+      font-weight: 600;
+      font-size: 18px;
+    }
+    .item-price {
+      color: #d32f2f;
+      font-weight: 600;
+      margin-top: 5px;
+    }
+    .remove-btn {
+      background-color: #e53935;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+    .remove-btn:hover {
+      background-color: #b71c1c;
+    }
+    .cart-footer {
+      text-align: right;
+      margin-top: 20px;
+    }
+    .checkout-btn {
+      background-color: #388e3c;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+    .checkout-btn:hover {
+      background-color: #1b5e20;
+    }
+  </style>
+</head>
+<body>
+
+<header>Swiftora - Your Cart</header>
+
+<div class="cart-container">
+  <button class="back-btn" onclick="goBack()">&larr; Back to Home</button>
+  <div id="cart-items"></div>
+
+  <div class="cart-footer">
+    <h3>Total: ₹<span id="cart-total">0</span></h3>
+    <button class="checkout-btn" onclick="goToCheckout()">Proceed to Checkout</button>
+  </div>
+</div>
+
+<script>
+  function goBack() {
+    window.location.href = 'index.html';
+  }
+
+  function goToCheckout() {
+    window.location.href = 'checkout.html';
+  }
+
+  function loadCart() {
+    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    const container = document.getElementById('cart-items');
+    container.innerHTML = '';
+
+    if (cartItems.length === 0) {
+      container.innerHTML = '<p>Your cart is empty.</p>';
+      document.getElementById('cart-total').textContent = '0';
+      return;
+    }
+
+    let total = 0;
+
+    cartItems.forEach((item, index) => {
+      const itemTotal = item.price * (item.quantity || 1);
+      total += itemTotal;
+
+      const itemDiv = document.createElement('div');
+      itemDiv.className = 'cart-item';
+      itemDiv.innerHTML = `
+        <div class="item-info">
+          <div class="item-title">${item.name}</div>
+          <div class="item-price">₹${item.price} x ${item.quantity || 1} = ₹${itemTotal}</div>
+        </div>
+        <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+      `;
+      container.appendChild(itemDiv);
+    });
+
+    document.getElementById('cart-total').textContent = total;
+  }
+
+  function removeItem(index) {
+    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    cartItems.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cartItems));
+    loadCart();
+  }
+
+  loadCart();
+</script>
+
+</body>
+</html>
