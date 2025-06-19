@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Health & Beauty - Swiftora</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="../style/health_beauty.css">
+</head>
+<body>
+
+<header>Health & Beauty - Swiftora</header>
+<a href="index.html" class="back-btn">← Back to Home</a>
+
+<div class="product-grid">
+  <div class="product-card">
+    <img src="facewash.jpeg" alt="Face Wash">
+    <div class="product-title">Neem Face Wash</div>
+    <div class="product-price">₹199</div>
+    <div class="product-desc">100ml | Suitable for oily skin | Paraben-free</div>
+    <button class="add-cart-btn" onclick="addToCart('Neem Face Wash', 199)">Add to Cart</button>
+  </div>
+
+  <div class="product-card">
+    <img src="shampoo.jpeg" alt="Shampoo">
+    <div class="product-title">Herbal Shampoo</div>
+    <div class="product-price">₹299</div>
+    <div class="product-desc">250ml | Anti-hair fall | With aloe & hibiscus</div>
+    <button class="add-cart-btn" onclick="addToCart('Herbal Shampoo', 299)">Add to Cart</button>
+  </div>
+
+  <div class="product-card">
+    <img src="vitamin.jpeg" alt="Multivitamins">
+    <div class="product-title">Daily Multivitamins</div>
+    <div class="product-price">₹399</div>
+    <div class="product-desc">60 Tablets | Boosts immunity & energy</div>
+    <button class="add-cart-btn" onclick="addToCart('Daily Multivitamins', 399)">Add to Cart</button>
+  </div>
+</div>
+
+<script>
+  function addToCart(productName, price) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const index = cart.findIndex(item => item.name === productName);
+    if (index !== -1) {
+      cart[index].quantity += 1;
+    } else {
+      cart.push({ name: productName, price: price, quantity: 1 });
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert(`${productName} added to cart!`);
+  }
+</script>
+
+</body>
+</html>

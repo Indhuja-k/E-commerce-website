@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Profile - E-Commerce</title>
+  <link rel="stylesheet" href="../style/profile.css" />
+</head>
+<body>
+
+  <div class="container">
+    <h2>My Profile</h2>
+    <p><strong>Full Name:</strong> <span id="fullName"></span></p>
+    <p><strong>Email:</strong> <span id="email"></span></p>
+    <p><strong>Phone:</strong> <span id="phone"></span></p>
+    <p><strong>Address:</strong> <span id="address"></span></p>
+    <p><strong>Username:</strong> <span id="username"></span></p>
+    <button onclick="logout()">Logout</button>
+    <button class="back-button" onclick="window.location.href='index.html'">
+      ← Back to Home
+    </button>
+  </div>
+
+  <script>
+    document.getElementById('fullName').textContent = localStorage.getItem('fullName') || 'N/A';
+    document.getElementById('email').textContent = localStorage.getItem('email') || 'N/A';
+    document.getElementById('phone').textContent = localStorage.getItem('phone') || 'N/A';
+    document.getElementById('address').textContent = localStorage.getItem('address') || 'N/A';
+    document.getElementById('username').textContent = localStorage.getItem('username') || 'N/A';
+
+    function logout() {
+      alert('You have been logged out.');
+      window.location.href = 'login.html';
+    }
+  </script>
+
+</body>
+</html>

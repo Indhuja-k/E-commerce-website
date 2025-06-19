@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Toys & Games - Swiftora</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="../style/toys_games.css">
+</head>
+<body>
+
+<header>Toys & Games - Swiftora</header>
+<a href="index.html" class="back-btn">← Back to Home</a>
+
+<div class="product-grid">
+
+  <div class="product-card">
+    <img src="lego.jpeg" alt="Lego Set">
+    <div class="product-title">LEGO Classic Set</div>
+    <div class="product-price">₹2,499</div>
+    <div class="product-desc">Creative building blocks | 500+ pieces | Ages 5+</div>
+    <button class="add-cart-btn" onclick="addToCart('LEGO Classic Set', 2499)">Add to Cart</button>
+  </div>
+
+  <div class="product-card">
+    <img src="car.jpeg" alt="Remote Car">
+    <div class="product-title">Remote Control Car</div>
+    <div class="product-price">₹999</div>
+    <div class="product-desc">Rechargeable | 4-wheel drive | Ages 6+</div>
+    <button class="add-cart-btn" onclick="addToCart('Remote Control Car', 999)">Add to Cart</button>
+  </div>
+
+  <div class="product-card">
+    <img src="boardgame.jpeg" alt="Board Game">
+    <div class="product-title">Ludo & Snakes Board Game</div>
+    <div class="product-price">₹399</div>
+    <div class="product-desc">2-in-1 classic board games | Family fun | Ages 4+</div>
+    <button class="add-cart-btn" onclick="addToCart('Ludo & Snakes Board Game', 399)">Add to Cart</button>
+  </div>
+
+</div>
+
+<script>
+  function addToCart(productName, price) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const index = cart.findIndex(item => item.name === productName);
+    if (index !== -1) {
+      cart[index].quantity += 1;
+    } else {
+      cart.push({ name: productName, price: price, quantity: 1 });
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert(`${productName} added to cart!`);
+  }
+</script>
+
+</body>
+</html>

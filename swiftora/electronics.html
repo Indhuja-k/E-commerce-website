@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Electronics - Swiftora</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="../style/electronics.css" />
+</head>
+<body>
+
+<header>Electronics - Swiftora</header>
+
+<a href="index.html" class="back-btn">← Back to Home</a>
+
+<div class="product-grid">
+
+  <div class="product-card">
+    <img src="smartphone.jpeg" alt="Smartphone">
+    <div class="product-title">Redmi Note 12</div>
+    <div class="product-price">₹14,999</div>
+    <div class="product-desc">6.5&quot; Display | 5000mAh Battery | 50MP Camera</div>
+    <button class="add-cart-btn" onclick="addToCart('Redmi Note 12', 14999)">Add to Cart</button>
+  </div>
+
+  <div class="product-card">
+    <img src="laptop.jpeg" alt="Laptop">
+    <div class="product-title">HP Pavilion 15</div>
+    <div class="product-price">₹48,999</div>
+    <div class="product-desc">Intel i5 | 8GB RAM | 512GB SSD | Win 11</div>
+    <button class="add-cart-btn" onclick="addToCart('HP Pavilion 15', 48999)">Add to Cart</button>
+  </div>
+
+  <div class="product-card">
+    <img src="tablet.jpeg" alt="Tablet">
+    <div class="product-title">Samsung Galaxy Tab A8</div>
+    <div class="product-price">₹18,499</div>
+    <div class="product-desc">10.5&quot; Display | 4GB RAM | 64GB Storage</div>
+    <button class="add-cart-btn" onclick="addToCart('Galaxy Tab A8', 18499)">Add to Cart</button>
+  </div>
+
+</div>
+
+<script>
+  function addToCart(productName, price) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const index = cart.findIndex(item => item.name === productName);
+    if (index !== -1) {
+      cart[index].quantity += 1;
+    } else {
+      cart.push({ name: productName, price: price, quantity: 1 });
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert(`${productName} added to cart!`);
+  }
+</script>
+
+</body>
+</html>

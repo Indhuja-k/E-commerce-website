@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Swiftora - Home</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="../style/index.css">
+</head>
+<body>
+
+<header>
+  Swiftora
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search products or categories..." />
+  </div>
+</header>
+
+<div class="nav-buttons">
+  <a href="index.html">Home</a>
+  <a href="profile.html">Profile</a>
+  <a href="cart.html">Cart</a>
+</div>
+
+<div class="discount-banner">
+  🎉 Big Deals Week! Up to 60% OFF on top categories – Limited Time Only!
+</div>
+
+<div class="category-grid">
+  <div class="category-card" onclick="location.href='electronics.html'">
+    <img src="electronics.jpeg" class="category-image" />
+    <div class="category-title">Electronics</div>
+  </div>
+
+  <div class="category-card" onclick="location.href='fashion.html'">
+    <img src="fashion.jpeg" class="category-image" />
+    <div class="category-title">Fashion</div>
+  </div>
+
+  <div class="category-card" onclick="location.href='home.html'">
+    <img src="homes.jpeg" class="category-image" />
+    <div class="category-title">Home</div>
+  </div>
+
+  <div class="category-card" onclick="location.href='kitchen.html'">
+    <img src="kitchen.jpeg" class="category-image" />
+    <div class="category-title">Kitchen</div>
+  </div>
+
+  <div class="category-card" onclick="location.href='health_beauty.html'">
+    <img src="bueaty.jpeg" class="category-image" />
+    <div class="category-title">Health & Beauty</div>
+  </div>
+
+  <div class="category-card" onclick="location.href='toys_games.html'">
+    <img src="toys.jpeg" class="category-image" />
+    <div class="category-title">Toys & Games</div>
+  </div>
+
+  <div class="category-card" onclick="location.href='books_media.html'">
+    <img src="books.jpeg" class="category-image" />
+    <div class="category-title">Books & Media</div>
+  </div>
+
+  <div class="category-card" onclick="location.href='sports_outdoors.html'">
+    <img src="sports.jpeg" class="category-image" />
+    <div class="category-title">Sports & Outdoors</div>
+  </div>
+
+  <div class="category-card" onclick="location.href='office_supplies.html'">
+    <img src="stationery.jpeg" class="category-image" />
+    <div class="category-title">Office & School Supplies</div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const searchInput = document.getElementById("searchInput");
+    const categoryCards = document.querySelectorAll(".category-card");
+
+    searchInput.addEventListener("input", function () {
+      const searchValue = searchInput.value.toLowerCase();
+
+      categoryCards.forEach(card => {
+        const title = card.querySelector(".category-title").innerText.toLowerCase();
+        card.style.display = title.includes(searchValue) ? "block" : "none";
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

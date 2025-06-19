@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kitchen Essentials - Swiftora</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="../style/kitchen.css">
+</head>
+<body>
+
+<header>Kitchen Essentials - Swiftora</header>
+<a href="index.html" class="back-btn">← Back to Home</a>
+
+<div class="product-grid">
+
+  <div class="product-card">
+    <img src="nonstick.jpeg" alt="Non-stick Pan">
+    <div class="product-title">Non-stick Fry Pan</div>
+    <div class="product-price">₹699</div>
+    <div class="product-desc">28cm | Scratch resistant | Cool touch handle</div>
+    <button class="add-cart-btn" onclick="addToCart('Non-stick Fry Pan', 699)">Add to Cart</button>
+  </div>
+
+  <div class="product-card">
+    <img src="knife.jpeg" alt="Knife Set">
+    <div class="product-title">Kitchen Knife Set</div>
+    <div class="product-price">₹899</div>
+    <div class="product-desc">5 stainless steel knives + peeler | Wooden stand</div>
+    <button class="add-cart-btn" onclick="addToCart('Kitchen Knife Set', 899)">Add to Cart</button>
+  </div>
+
+  <div class="product-card">
+    <img src="bowl.jpeg" alt="Mixing Bowl Set">
+    <div class="product-title">Mixing Bowl Set</div>
+    <div class="product-price">₹549</div>
+    <div class="product-desc">Set of 3 | BPA-free plastic | Lids included</div>
+    <button class="add-cart-btn" onclick="addToCart('Mixing Bowl Set', 549)">Add to Cart</button>
+  </div>
+
+</div>
+
+<script>
+  function addToCart(productName, price) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const index = cart.findIndex(item => item.name === productName);
+    if (index !== -1) {
+      cart[index].quantity += 1;
+    } else {
+      cart.push({ name: productName, price: price, quantity: 1 });
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert(`${productName} added to cart!`);
+  }
+</script>
+
+</body>
+</html>

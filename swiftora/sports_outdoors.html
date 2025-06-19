@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sports & Outdoors - Swiftora</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="../style/sports_outdoors.css">
+</head>
+<body>
+
+<header>Sports & Outdoors - Swiftora</header>
+<a href="index.html" class="back-btn">← Back to Home</a>
+
+<div class="product-grid">
+
+  <div class="product-card">
+    <img src="football.jpeg" alt="Football">
+    <div class="product-title">NIVIA Football Size 5</div>
+    <div class="product-price">₹599</div>
+    <div class="product-desc">Durable rubber | Official size | All-surface use</div>
+    <button class="add-cart-btn" onclick="addToCart('NIVIA Football', 599)">Add to Cart</button>
+  </div>
+
+  <div class="product-card">
+    <img src="yoga_mat.jpeg" alt="Yoga Mat">
+    <div class="product-title">Anti-Slip Yoga Mat</div>
+    <div class="product-price">₹999</div>
+    <div class="product-desc">6mm thick | Anti-tear | Includes carry strap</div>
+    <button class="add-cart-btn" onclick="addToCart('Yoga Mat', 999)">Add to Cart</button>
+  </div>
+
+  <div class="product-card">
+    <img src="tent.jpeg" alt="Camping Tent">
+    <div class="product-title">2-Person Camping Tent</div>
+    <div class="product-price">₹2,499</div>
+    <div class="product-desc">Waterproof | Easy setup | Includes carry bag</div>
+    <button class="add-cart-btn" onclick="addToCart('Camping Tent', 2499)">Add to Cart</button>
+  </div>
+
+</div>
+
+<script>
+  function addToCart(productName, price) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const index = cart.findIndex(item => item.name === productName);
+    if(index !== -1) {
+      cart[index].quantity += 1;
+    } else {
+      cart.push({ name: productName, price: price, quantity: 1 });
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert(`${productName} added to cart!`);
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login - E-Commerce</title>
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="../style/login.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Login to Your Account</h2>
+    <form id="loginForm">
+      <input type="text" id="username" placeholder="Username" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <button type="submit">Login</button>
+      <div id="msg"></div>
+    </form>
+    <p>Don't have an account? <a href="register.html">Register here</a></p>
+    <p><a href="forgot-password.html">Forgot your password?</a></p>
+  </div>
+
+  <script>
+    const loginForm = document.getElementById('loginForm');
+    const msg = document.getElementById('msg');
+
+    loginForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+
+      const storedUsername = localStorage.getItem('username');
+      const storedPassword = localStorage.getItem('password');
+
+      if (username === storedUsername && password === storedPassword) {
+        msg.style.color = 'green';
+        msg.textContent = 'Login successful! Redirecting...';
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 1200);
+      } else {
+        msg.style.color = 'red';
+        msg.textContent = 'Invalid username or password!';
+      }
+    });
+  </script>
+</body>
+</html>

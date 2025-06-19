@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Office & School Supplies - Swiftora</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../style/office_supplies.css" />
+</head>
+<body>
+
+<header>Office & School Supplies - Swiftora</header>
+<a href="index.html" class="back-btn">← Back to Home</a>
+
+<div class="product-grid">
+  <div class="product-card">
+    <img src="notebook.jpeg" alt="Notebook" />
+    <div class="product-title">Classmate Notebook (200 pages)</div>
+    <div class="product-price">₹89</div>
+    <div class="product-desc">A4 size | Ruled | Durable binding</div>
+    <button class="add-cart-btn" onclick="addToCart('Classmate Notebook', 89)">Add to Cart</button>
+  </div>
+
+  <div class="product-card">
+    <img src="pen_set.png" alt="Pen Set" />
+    <div class="product-title">Reynolds Ball Pen Set</div>
+    <div class="product-price">₹60</div>
+    <div class="product-desc">Pack of 10 | Blue ink | Smooth writing</div>
+    <button class="add-cart-btn" onclick="addToCart('Reynolds Pen Set', 60)">Add to Cart</button>
+  </div>
+
+  <div class="product-card">
+    <img src="calculator.jpeg" alt="Calculator" />
+    <div class="product-title">Casio Scientific Calculator</div>
+    <div class="product-price">₹799</div>
+    <div class="product-desc">FX-991MS | 401 functions | Exam-ready</div>
+    <button class="add-cart-btn" onclick="addToCart('Casio Calculator', 799)">Add to Cart</button>
+  </div>
+</div>
+
+<script>
+  function addToCart(productName, price) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const index = cart.findIndex(item => item.name === productName);
+    if(index !== -1) {
+      cart[index].quantity += 1;
+    } else {
+      cart.push({ name: productName, price: price, quantity: 1 });
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert(`${productName} added to cart!`);
+  }
+</script>
+
+</body>
+</html>

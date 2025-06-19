@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart - Swiftora</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #e3f2fd;
+    }
+    header {
+      background-color: #1976d2;
+      color: white;
+      padding: 20px;
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+    }
+    .cart-container {
+      max-width: 900px;
+      margin: 30px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .cart-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 10px;
+    }
+    .item-info {
+      flex: 1;
+    }
+    .item-title {
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .item-price {
+      color: #d32f2f;
+      font-weight: bold;
+    }
+    .remove-btn {
+      background-color: #e53935;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .cart-footer {
+      text-align: right;
+      margin-top: 20px;
+    }
+    .checkout-btn {
+      background-color: #388e3c;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .back-btn {
+      background-color: #1976d2;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<header>Swiftora - Your Cart</header>
+
+<div class="cart-container">
+  <button class="back-btn" onclick="goBack()">&larr; Back to Home</button>
+  <div id="cart-items"></div>
+
+  <div class="cart-footer">
+    <h3>Total: ₹<span id="cart-total">0</span></h3>
+    <button class="checkout-btn" onclick="goToCheckout()">Proceed to Checkout</button>
+  </div>
+</div>
+
+<script>
+  function goBack() {
+    window.location.href = 'index.html';  // ✅ changed from home.html
+  }
+
+  function goToCheckout() {
+    window.location.href = 'checkout.html';
+  }
+
+  function loadCart() {
+    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    const container = document.getElementById('cart-items');
+    container.innerHTML = '';
+    let total = 0;
+
+    if (cartItems.length === 0) {
+      container.innerHTML = '<p>Your cart is empty.</p>';
+    }
+
+    cartItems.forEach((item, index) => {
+      total += item.price;
+      const itemDiv = document.createElement('div');
+      itemDiv.className = 'cart-item';
+      itemDiv.innerHTML = `
+        <div class="item-info">
+          <div class="item-title">${item.name}</div>
+          <div class="item-price">₹${item.price}</div>
+        </div>
+        <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+      `;
+      container.appendChild(itemDiv);
+    });
+
+    document.getElementById('cart-total').textContent = total;
+  }
+
+  function removeItem(index) {
+    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    cartItems.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cartItems));
+    loadCart();
+  }
+
+  loadCart();
+</script>
+
+</body>
+</html>

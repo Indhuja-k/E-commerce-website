@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cart - Swiftora</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="../style/cart.css" />
+</head>
+<body>
+
+<header>Swiftora - Your Cart</header>
+
+<div class="cart-container">
+  <button class="back-btn" onclick="goBack()">&larr; Back to Home</button>
+  <div id="cart-items"></div>
+
+  <div class="cart-footer">
+    <h3>Total: ₹<span id="cart-total">0</span></h3>
+    <button class="checkout-btn" onclick="goToCheckout()">Proceed to Checkout</button>
+  </div>
+</div>
+
+<script>
+  function goBack() {
+    window.location.href = 'index.html';
+  }
+
+  function goToCheckout() {
+    window.location.href = 'checkout.html';
+  }
+
+  function loadCart() {
+    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    const container = document.getElementById('cart-items');
+    container.innerHTML = '';
+
+    if (cartItems.length === 0) {
+      container.innerHTML = '<p>Your cart is empty.</p>';
+      document.getElementById('cart-total').textContent = '0';
+      return;
+    }
+
+    let total = 0;
+
+    cartItems.forEach((item, index) => {
+      const itemTotal = item.price * (item.quantity || 1);
+      total += itemTotal;
+
+      const itemDiv = document.createElement('div');
+      itemDiv.className = 'cart-item';
+      itemDiv.innerHTML = `
+        <div class="item-info">
+          <div class="item-title">${item.name}</div>
+          <div class="item-price">₹${item.price} x ${item.quantity || 1} = ₹${itemTotal}</div>
+        </div>
+        <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+      `;
+      container.appendChild(itemDiv);
+    });
+
+    document.getElementById('cart-total').textContent = total;
+  }
+
+  function removeItem(index) {
+    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    cartItems.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cartItems));
+    loadCart();
+  }
+
+  loadCart();
+</script>
+
+</body>
+</html>

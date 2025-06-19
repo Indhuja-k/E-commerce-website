@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Home Essentials - Swiftora</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="../style/home.css">
+</head>
+<body>
+
+<header>Home Essentials - Swiftora</header>
+<a href="index.html" class="back-btn">← Back to Home</a>
+
+<div class="product-grid">
+
+  <div class="product-card">
+    <img src="cooker.jpeg" alt="Pressure Cooker">
+    <div class="product-title">Prestige Pressure Cooker</div>
+    <div class="product-price">₹2,499</div>
+    <div class="product-desc">5L capacity | Aluminium body | Suitable for gas & induction</div>
+    <button class="add-cart-btn" onclick="addToCart('Prestige Pressure Cooker', 2499)">Add to Cart</button>
+  </div>
+
+  <div class="product-card">
+    <img src="bedsheet.jpeg" alt="Bed Sheet">
+    <div class="product-title">Cotton Double Bedsheet</div>
+    <div class="product-price">₹999</div>
+    <div class="product-desc">Pure cotton | 90x100 inches | Includes 2 pillow covers</div>
+    <button class="add-cart-btn" onclick="addToCart('Cotton Double Bedsheet', 999)">Add to Cart</button>
+  </div>
+
+  <div class="product-card">
+    <img src="lamp.jpeg" alt="Decorative Lamp">
+    <div class="product-title">LED Decorative Lamp</div>
+    <div class="product-price">₹649</div>
+    <div class="product-desc">Warm light | Modern design | Ideal for bedroom & hall</div>
+    <button class="add-cart-btn" onclick="addToCart('LED Decorative Lamp', 649)">Add to Cart</button>
+  </div>
+
+</div>
+
+<script>
+  function addToCart(productName, price) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const index = cart.findIndex(item => item.name === productName);
+    if (index !== -1) {
+      cart[index].quantity += 1;
+    } else {
+      cart.push({ name: productName, price: price, quantity: 1 });
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert(`${productName} added to cart!`);
+  }
+</script>
+
+</body>
+</html>
